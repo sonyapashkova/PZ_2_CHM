@@ -6,7 +6,7 @@
 
 const double PI = 3.141592653589793238463;
 
-// Генерация равномерной сетки, Num_Segment - число сегментов
+// Р“РµРЅРµСЂР°С†РёСЏ СЂР°РІРЅРѕРјРµСЂРЅРѕР№ СЃРµС‚РєРё, Num_Segment - С‡РёСЃР»Рѕ СЃРµРіРјРµРЅС‚РѕРІ
 std::vector<Com_Methods::Point> Generate_Mesh(double a, double b, int Num_Segment) {
 	std::vector<Com_Methods::Point> Mesh;
 	double h = 0;
@@ -24,7 +24,7 @@ std::vector<Com_Methods::Point> Generate_Mesh(double a, double b, int Num_Segmen
 
 int main() {
 	try {
-		// Равномерная сетка
+		// Р Р°РІРЅРѕРјРµСЂРЅР°СЏ СЃРµС‚РєР°
 		std::vector<Com_Methods::Point> Mesh = Generate_Mesh(0, PI / 2, 3);
 		Com_Methods::Cubic_Interpolation_Spline_1D Spline;
 		std::vector<double> Func;
@@ -43,15 +43,15 @@ int main() {
 														  Com_Methods::Point(PI / 3, 0.0, 0.0),
 														  Com_Methods::Point(PI / 2, 0.0, 0.0) };
 		
-		// Вычисление значений функции в узловых точках сетки
+		// Р’С‹С‡РёСЃР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёР№ С„СѓРЅРєС†РёРё РІ СѓР·Р»РѕРІС‹С… С‚РѕС‡РєР°С… СЃРµС‚РєРё
 		for (int i = 0; i < Mesh.size(); i++) {
 			Func.push_back(cos(Mesh[i].x()));
 		}
 
-		// Построение сплайна
+		// РџРѕСЃС‚СЂРѕРµРЅРёРµ СЃРїР»Р°Р№РЅР°
 		Spline.Update_Spline(Mesh, Func);
 
-		// Значение сплайна в точках, не совпадающих с узловыми
+		// Р—РЅР°С‡РµРЅРёРµ СЃРїР»Р°Р№РЅР° РІ С‚РѕС‡РєР°С…, РЅРµ СЃРѕРІРїР°РґР°СЋС‰РёС… СЃ СѓР·Р»РѕРІС‹РјРё
 		for (int i = 0; i < Random_Points.size(); i++) {
 			Spline.Get_Value(Com_Methods::Point(Random_Points[i].x(), 0.0, 0.0), Res);
 			std::cout << "g(x) = " << Res[0] << "\t" << "g'(x) = " << Res[1] << "\t" << "g''(x) = " << Res[2] << std::endl;
